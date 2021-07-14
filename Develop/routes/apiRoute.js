@@ -1,23 +1,23 @@
-let noteData = require("../db/noteData");
+const uniqId = require("uniqId");
+let database = require("../db/noteData");
 
-const saveNotes = (data) => {
-    console.log('save data in api route',data);
-    // TODO: push data to the mock database
-    noteData.push(data);
-    console.log(noteData);
-};
+module.exports = (app)=> {
+    app.get("/api/notes",(req,res) => {
+            res.send(database);
+    });
 
-const getNotes = () => {
-    return noteData
-}
-
-const deleteNote = (id) => {
-    console.log(id);
-    noteData = noteData.filter((obj)=>{
-    console.log("Object", obj);
-        return obj.id !== id;
+    app.delete("/api/notes",(req,res)=>{
+            let id = req.body.id;
+            database = database.filter((obj)=>{
+                return obj.id !== id;
+            })
+            res.send(database);
     })
-    console.log(noteData);
-}
 
-module.exports = {saveNotes, getNotes, deleteNote};
+    app.post("/api/notes",(req,res)=> {
+            let data = req.body;
+            data.id = uniqId();
+            database.push(data);
+            res.send(database);
+    });
+};

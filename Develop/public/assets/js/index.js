@@ -31,16 +31,17 @@ const getNotes = () =>
     headers: {
       'Content-Type': 'application/json',
     },
-  });
+  }).then(response => response.json());
 
 const saveNote = (note) =>
-  fetch('/api/notes', {
+fetch('/api/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
   });
+
 
   const deleteNote = (id = null) =>
   fetch("/api/notes", {
@@ -72,8 +73,6 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value,
   };
-  console.log(newNote);
-
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -121,7 +120,7 @@ const handleRenderSaveBtn = () => {
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
-  let jsonNotes = await notes.json();
+  let jsonNotes = notes
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
