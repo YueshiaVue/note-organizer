@@ -4,6 +4,11 @@ const saveNotes = (data) => {
     console.log('save data in api route',data);
     // TODO: push data to the mock database
     noteData.push(data);
+    console.log(noteData);
 };
 
-module.exports = {saveNotes};
+const getNotes = () => {
+    return noteData
+}
+
+module.exports = {saveNotes, getNotes};
