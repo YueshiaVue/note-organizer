@@ -1,4 +1,4 @@
-const noteData = require("../db/noteData");
+let noteData = require("../db/noteData");
 
 const saveNotes = (data) => {
     console.log('save data in api route',data);
@@ -11,4 +11,13 @@ const getNotes = () => {
     return noteData
 }
 
-module.exports = {saveNotes, getNotes};
+const deleteNote = (id) => {
+    console.log(id);
+    noteData = noteData.filter((obj)=>{
+    console.log("Object", obj);
+        return obj.id !== id;
+    })
+    console.log(noteData);
+}
+
+module.exports = {saveNotes, getNotes, deleteNote};

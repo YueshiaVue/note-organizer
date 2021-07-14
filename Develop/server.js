@@ -3,6 +3,7 @@ const apiRoute = require("./routes/apiRoute");
 const htmlRoute = require("./routes/htmlRoute");
 const path = require("path");
 const router = express.Router()
+const uniqId = require("uniqId");
 
 // Start app and create a port
 const app = express();
@@ -27,8 +28,14 @@ app.get("/api/notes",
         res.send(data);
 });
 
+app.delete("/api/notes",(req,res)=>{
+        let data = req.body;
+        apiRoute.deleteNote(data.id);
+})
+
 app.post("/api/notes",(req,res)=> {
         let data = req.body;
+        data.id = uniqId();
         console.log('data',data);
         // console.log('response',res);
         apiRoute.saveNotes(data);
