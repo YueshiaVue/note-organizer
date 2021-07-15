@@ -6,7 +6,7 @@ const router = express.Router()
 
 // Start app and create a port
 const app = express();
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 htmlRoute(router);
 
 // Sets up the Express app to handle data parsing
