@@ -8,7 +8,8 @@ const router = express.Router()
 const app = express();
 const PORT = process.env.PORT || 3001
 // htmlRoute(router);
-const uniqId = require("uniqId");
+// const uniqId = require("uniqId");
+const { v4: uniqId } = require('uuid');
 let database = require("./db/noteData");
 
 router.get('/',function(req,res) {
